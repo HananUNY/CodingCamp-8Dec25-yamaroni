@@ -1,70 +1,284 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo List - Yama</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PasarKita - Landing Page UMKM Indonesia</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0f1a1c;
+      --paper: #f7f2e8;
+      --sun: #f4c84b;
+      --leaf: #2f6f52;
+      --sea: #2a6f97;
+      --clay: #f2a391;
+      --berry: #6b3fa0;
+    }
 
-    <!-- CSS External File -->
-    <link rel="stylesheet" href="css/style.css">
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 600px at 15% -10%, #ffe9b3 0%, rgba(255,233,179,0) 60%),
+        radial-gradient(800px 600px at 110% 10%, #cdeef7 0%, rgba(205,238,247,0) 55%),
+        linear-gradient(180deg, #fbf7ef 0%, #f2efe8 100%);
+    }
 
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    .wrapper { max-width: 1120px; margin: 0 auto; padding: 28px 22px 72px; }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 12px; font-weight: 700; letter-spacing: 0.3px;
+    }
+    .logo {
+      width: 44px; height: 44px; border-radius: 12px; background: var(--sun);
+      display: grid; place-items: center; font-weight: 700;
+      box-shadow: 0 12px 25px rgba(244,200,75,0.35);
+    }
+    nav { display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a {
+      text-decoration: none; color: var(--ink); font-size: 0.95rem; font-weight: 500;
+    }
+    .cta-primary {
+      padding: 12px 18px; border-radius: 999px; background: var(--leaf); color: #fff; border: 0;
+      font-weight: 600; cursor: pointer;
+      box-shadow: 0 16px 30px rgba(47,111,82,0.3);
+    }
+
+    .hero {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 36px; margin-top: 54px; align-items: center;
+    }
+    .hero h1 {
+      font-family: "Fraunces", serif; font-size: clamp(2.4rem, 4vw, 3.7rem);
+      margin: 0 0 16px;
+    }
+    .hero p { font-size: 1.05rem; line-height: 1.7; margin: 0 0 22px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-secondary {
+      padding: 11px 18px; border-radius: 999px; background: #fff; border: 1px solid #d7d1c4;
+      font-weight: 600; cursor: pointer;
+    }
+
+    .hero-card {
+      background: #fff; border-radius: 26px; padding: 28px; box-shadow: 0 22px 60px rgba(15,26,28,0.12);
+      position: relative; overflow: hidden;
+    }
+    .hero-card::after {
+      content: ""; position: absolute; width: 160px; height: 160px; border-radius: 50%;
+      background: rgba(244,200,75,0.35); right: -40px; top: -40px;
+    }
+    .stat-grid { display: grid; grid-template-columns: repeat(2, minmax(140px, 1fr)); gap: 14px; }
+    .stat {
+      background: #f8f6f0; border-radius: 16px; padding: 14px;
+    }
+    .stat h3 { margin: 0 0 6px; font-size: 1.4rem; }
+    .stat small { color: #5a5a56; }
+
+    .section {
+      margin-top: 70px;
+      display: grid; gap: 24px;
+    }
+    .section-title { font-size: 1.8rem; margin: 0; }
+    .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .card {
+      background: #fff; padding: 20px; border-radius: 20px; box-shadow: 0 12px 30px rgba(15,26,28,0.08);
+    }
+    .tag {
+      display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;
+      background: #f1e8d6;
+    }
+    .accent { color: var(--leaf); font-weight: 700; }
+
+    .cta-strip {
+      margin-top: 70px; background: linear-gradient(120deg, #1d4d3a, #2f6f52); color: #fff;
+      padding: 32px; border-radius: 26px; display: grid; gap: 18px;
+    }
+    .cta-strip h2 { margin: 0; font-size: 2rem; }
+    .cta-strip p { margin: 0; max-width: 640px; }
+    .cta-strip form { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cta-strip input {
+      padding: 12px 16px; border-radius: 999px; border: 0; min-width: 220px; flex: 1;
+    }
+    .cta-strip button {
+      padding: 12px 18px; border-radius: 999px; border: 0; background: var(--sun); font-weight: 700; cursor: pointer;
+    }
+
+    footer {
+      margin-top: 70px; padding-top: 20px; border-top: 1px solid #d9d2c4;
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+      font-size: 0.9rem;
+    }
+
+    .float-chip {
+      display: inline-flex; align-items: center; gap: 8px; background: #fff; padding: 8px 14px;
+      border-radius: 999px; border: 1px solid #e6dfd2; font-size: 0.85rem; font-weight: 600;
+    }
+
+    .grid-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+    .step { background: #fff; border-radius: 18px; padding: 18px; border: 1px solid #efe7d9; }
+    .step strong { display: block; margin-bottom: 8px; }
+
+    .reveal { animation: fadeUp 0.9s ease both; }
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
-
 <body>
-    <!-- Header Content -->
-    <header class="pb-2">
-        <h1 class="text-2xl">Todo List - Yama</h1>
+  <div class="wrapper">
+    <header class="reveal">
+      <div class="brand">
+        <div class="logo">PK</div>
+        <div>
+          <div>PasarKita</div>
+          <small class="accent">Marketplace UMKM</small>
+        </div>
+      </div>
+      <nav>
+        <a href="#manfaat">Manfaat</a>
+        <a href="#fitur">Fitur</a>
+        <a href="#cara">Cara Kerja</a>
+        <a href="#testimoni">Testimoni</a>
+      </nav>
+      <button class="cta-primary">Gabung Sekarang</button>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <!-- Form Section -->
-        <section>
-            <form>
-                <!-- Todo Input -->
-                <input class="border rounded p-2" type="text" id="todo-input" placeholder="Enter a new todo item">
+    <section class="hero">
+      <div class="reveal delay-1">
+        <span class="float-chip">Dari Nusantara untuk Pasar Dunia</span>
+        <h1>Bangun brand UMKM Anda, temukan pelanggan baru setiap hari.</h1>
+        <p>
+          PasarKita membantu UMKM Indonesia mengelola toko online, promosi, dan logistik
+          dalam satu dashboard yang simpel. Fokuslah pada produk, kami urus sisanya.
+        </p>
+        <div class="hero-actions">
+          <button class="cta-primary">Mulai Gratis 30 Hari</button>
+          <button class="cta-secondary">Lihat Demo</button>
+        </div>
+      </div>
+      <div class="hero-card reveal delay-2">
+        <h2 style="margin-top:0;">Ringkasan Pertumbuhan</h2>
+        <p style="margin-top:0;">Dalam 3 bulan terakhir mitra UMKM meningkat penjualannya secara konsisten.</p>
+        <div class="stat-grid">
+          <div class="stat">
+            <h3>+38%</h3>
+            <small>Penjualan Bulanan</small>
+          </div>
+          <div class="stat">
+            <h3>2.4x</h3>
+            <small>Jangkauan Pembeli</small>
+          </div>
+          <div class="stat">
+            <h3>98%</h3>
+            <small>Pengiriman Tepat Waktu</small>
+          </div>
+          <div class="stat">
+            <h3>24/7</h3>
+            <small>Dukungan Admin</small>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                <!-- Date Input -->
-                <input class="border rounded p-2" type="date" id="todo-date" placeholder="Enter due date">
-            </form>
+    <section class="section" id="manfaat">
+      <h2 class="section-title reveal">Kenapa UMKM memilih PasarKita?</h2>
+      <div class="card-grid">
+        <article class="card reveal delay-1">
+          <span class="tag">Branding</span>
+          <h3>Identitas Toko Lebih Profesional</h3>
+          <p>Template katalog, foto produk, dan halaman profil bisnis siap pakai.</p>
+        </article>
+        <article class="card reveal delay-2">
+          <span class="tag">Penjualan</span>
+          <h3>Penawaran Promo Otomatis</h3>
+          <p>Atur diskon musiman, bundling produk, hingga voucher loyalitas.</p>
+        </article>
+        <article class="card reveal delay-3">
+          <span class="tag">Operasional</span>
+          <h3>Logistik Terintegrasi</h3>
+          <p>Pilih kurir, lacak paket, dan pantau status pengiriman real-time.</p>
+        </article>
+      </div>
+    </section>
 
-            <!-- Add Button -->
-            <button class="border rounded p-2 bg-green-500 text-white" onclick="addTodo();" type="button">Add
-                Todo</button>
-        </section>
+    <section class="section" id="fitur">
+      <h2 class="section-title reveal">Fitur utama untuk UMKM Indonesia</h2>
+      <div class="card-grid">
+        <div class="card reveal delay-1">
+          <h3>Dashboard Keuangan</h3>
+          <p>Catat pemasukan, pengeluaran, dan margin per produk secara otomatis.</p>
+        </div>
+        <div class="card reveal delay-2">
+          <h3>Promosi Multi-Channel</h3>
+          <p>Sinkronisasi ke marketplace, Instagram, dan WhatsApp bisnis.</p>
+        </div>
+        <div class="card reveal delay-3">
+          <h3>Akademi UMKM</h3>
+          <p>Kelas singkat tentang foto produk, copywriting, dan strategi penjualan.</p>
+        </div>
+      </div>
+    </section>
 
-        <!-- Action Section -->
-        <section class="flex pt-2 justify-between">
-            <!-- Clear All Button -->
-            <button class="border rounded p-2 bg-red-500 text-white" onclick="resetTodos();">Clear All Todos</button>
+    <section class="section" id="cara">
+      <h2 class="section-title reveal">Mulai dalam 3 langkah</h2>
+      <div class="grid-steps">
+        <div class="step reveal delay-1">
+          <strong>1. Daftarkan usaha</strong>
+          Lengkapi profil bisnis dan unggah katalog produk utama.
+        </div>
+        <div class="step reveal delay-2">
+          <strong>2. Atur promosi</strong>
+          Pilih template kampanye yang sesuai dengan target pembeli Anda.
+        </div>
+        <div class="step reveal delay-3">
+          <strong>3. Terima order</strong>
+          Pantau pesanan masuk, siapkan pengiriman, dan follow-up pelanggan.
+        </div>
+      </div>
+    </section>
 
-            <!-- Filter Options -->
-            <button class="border rounded p-2 bg-blue-500 text-white">Filter Todos</button>
-        </section>
+    <section class="section" id="testimoni">
+      <h2 class="section-title reveal">Cerita mitra UMKM</h2>
+      <div class="card-grid">
+        <article class="card reveal delay-1">
+          <p>"Sejak bergabung, pesanan toko kue kami stabil dan lebih mudah dikelola."</p>
+          <strong>- Naila, UMKM Kuliner Bandung</strong>
+        </article>
+        <article class="card reveal delay-2">
+          <p>"Fitur promo otomatis bikin produk kerajinan kami cepat dikenal."</p>
+          <strong>- Dimas, UMKM Kriya Yogyakarta</strong>
+        </article>
+        <article class="card reveal delay-3">
+          <p>"Dashboard keuangan membantu saya tahu produk mana yang paling untung."</p>
+          <strong>- Ratih, UMKM Fashion Surabaya</strong>
+        </article>
+      </div>
+    </section>
 
-        <!-- Todo List Section -->
-        <section class="pt-2">
-            <header>
-                <h1 class="text-2xl font-semibold">List of Todos</h1>
-            </header>
+    <section class="cta-strip reveal">
+      <h2>Siap naik kelas bersama UMKM Indonesia?</h2>
+      <p>Masukkan email Anda untuk mendapatkan akses demo dan panduan peningkatan penjualan.</p>
+      <form>
+        <input type="email" placeholder="nama@usaha.id" />
+        <button type="submit">Dapatkan Demo</button>
+      </form>
+    </section>
 
-            <ul class="pt-2" id="todo-list">
-                <!-- Todo items will be dynamically added here -->
-                <li>No todos available</li>
-            </ul>
-        </section>
-    </main>
-
-    <!-- Footer Content -->
-    <footer class="pt-2">
-        <p>&copy; 2025 Todo List App. All rights reserved.</p>
+    <footer>
+      <span>© 2026 PasarKita. Seluruh hak cipta dilindungi.</span>
+      <span>Kontak: hello@pasarkita.id • Jakarta, Indonesia</span>
     </footer>
-
-    <!-- Javascript External -->
-    <script src="js/script.js"></script>
+  </div>
 </body>
-
 </html>
